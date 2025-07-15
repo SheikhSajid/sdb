@@ -36,17 +36,19 @@ This will compile the `libsdb` library as defined in `src/CMakeLists.txt`. The o
 This project should be placed at `/root/sdb` in an iMX 6 powered device and contains the following main directories and files:
 
 ```
-my_debugger/
+sdb
 ├── CMakeLists.txt
 ├── include/
-│   └── libsdb/          # public headers used by consumers
+│   └── libsdb/            # public headers used by consumers
 ├── src/
-│   └── include          # private headers
+│   ├── include            # private headers
+│   ├── libsdb.cpp         # library
 │   └── CMakeLists.txt
 ├── test/                
 │   └── CMakeLists.txt
 └── tools/
-    └── CMakeLists.txt
+    ├── CMakeLists.txt
+    └── sdb.cpp            # program that uses libsdb
 ```
 
 ## Directory Descriptions
