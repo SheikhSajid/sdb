@@ -47,6 +47,15 @@
 
 This will compile the `libsdb` library as defined in `src/CMakeLists.txt`. The output library will be named `libsdb` (or `sdb`).
 
+## Installing Packages using vcpkg
+
+```sh
+pushd ~/vcpkg
+VCPKG_FORCE_SYSTEM_BINARIES=1 ./vcpkg install <pkg_name>
+popd
+```
+
+
 
 # Project File Tree
 
