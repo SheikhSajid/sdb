@@ -2,10 +2,27 @@
 
 ## Prerequisites
 
-- **CMake** (install with `apt install cmake` on Debian)
+- **CMake**
 - **C++17 compiler** (e.g., g++, clang++)
+- **vcpkg**
 
-## Steps
+## Install Prerequisites
+
+1. **Install build tools:**
+   ```sh
+   apt update
+   apt install -y build-essential cmake ninja-build
+   ```
+
+2. **Clone and build vcpkg:**
+   ```sh
+   pushd ..
+   git clone https://github.com/microsoft/vcpkg.git
+   VCPKG_FORCE_SYSTEM_BINARIES=1 ./vcpkg/bootstrap-vcpkg.sh
+   popd
+   ```
+
+## Build Steps
 
 1. **Create a build directory:**
    ```sh
@@ -15,7 +32,7 @@
 
 2. **Run CMake to configure the project:**
    ```sh
-   cmake ..
+   cmake .. -DCMAKE_TOOLCHAIN_FILE=/root/vcpkg/scripts/buildsystems/vcpkg.cmake
    ```
 
 3. **Build the library:**
@@ -36,7 +53,7 @@ This will compile the `libsdb` library as defined in `src/CMakeLists.txt`. The o
 This project should be placed at `/root/sdb` in an iMX 6 powered device and contains the following main directories and files:
 
 ```
-sdb
+sdb/
 ├── CMakeLists.txt
 ├── include/
 │   └── libsdb/            # public headers used by consumers
