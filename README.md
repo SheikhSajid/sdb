@@ -55,8 +55,6 @@ VCPKG_FORCE_SYSTEM_BINARIES=1 ./vcpkg install <pkg_name>
 popd
 ```
 
-
-
 # Project File Tree
 
 This project should be placed at `/root/sdb` in an iMX 6 powered device and contains the following main directories and files:
@@ -67,7 +65,7 @@ sdb/
 ├── include/
 │   └── libsdb/            # public headers used by consumers
 ├── src/
-│   ├── include            # private headers
+│   ├── include/           # private headers
 │   ├── libsdb.cpp         # library
 │   └── CMakeLists.txt
 ├── test/                
