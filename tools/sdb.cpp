@@ -44,7 +44,7 @@ namespace { // Anonymous namespace to limit scope
       }
 
       if (pid == 0) { 
-        // In child process (debugee)
+        // In child process (tracee)
         if (ptrace(PTRACE_TRACEME, 0, nullptr, nullptr) < 0) {
           std::perror("Tracing failed");
           return -1;
