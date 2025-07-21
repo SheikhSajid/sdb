@@ -11,8 +11,11 @@
 #include <string.h>
 #include <libsdb/process.hpp>
 #include <signal.h>
+#include <libsdb/error.hpp>
 
 namespace { // Anonymous namespace to limit scope
+
+
   void print_stop_reason(
     const sdb::process& process,
     sdb::stop_reason reason
@@ -87,6 +90,32 @@ namespace { // Anonymous namespace to limit scope
       std::cerr << "Unknown command\n";
     }
   }
+
+  void main_loop(std::unique_ptr<sdb::process>& process) {
+    char* line = nullptr;
+    while ((line = readline("sdb> ")) != nullptr) {
+      std::string line_str;
+
+      if (line == std::string_view("")) {
+        free(line);
+        if (history_length > 0) {
+          line_str = history_list()[history_length - 1]->line;
+        }
+      } else {
+        line_str = line;
+        add_history(line);
+        free(line);
+      }
+
+      if (!line_str.empty()) {
+        try {
+          handle_command(process, line_str);
+        } catch (const sdb::error& err) {
+          std::cout << err.what() << '\n';
+        }
+      }
+    }
+  }
 }
 
 int main(int argc, const char** argv) {
@@ -95,14 +124,11 @@ int main(int argc, const char** argv) {
     return -1;
   }
 
-  std::unique_ptr<sdb::process> target_pid = attach(argc, argv);
-  target_pid->wait_on_signal();
-
-  char* line = nullptr;
-  while ((line = readline("sdb> ")) != nullptr) {
-    handle_command(target_pid, line);
-    add_history(line);
-    free(line);
+  try {
+    auto process = attach(argc, argv);
+    main_loop(process);
+  } catch (const sdb::error& err) {
+    std::cout << err.what() << std::endl;
   }
 
   return 0;
