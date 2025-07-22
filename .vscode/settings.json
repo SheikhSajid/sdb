@@ -50,6 +50,9 @@
     "sstream": "cpp",
     "cstring": "cpp",
     "filesystem": "cpp",
-    "csignal": "cpp"
+    "csignal": "cpp",
+    "chrono": "cpp",
+    "optional": "cpp",
+    "variant": "cpp"
   }
 }
