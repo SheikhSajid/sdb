@@ -53,6 +53,7 @@
     "csignal": "cpp",
     "chrono": "cpp",
     "optional": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "fstream": "cpp"
   }
 }
