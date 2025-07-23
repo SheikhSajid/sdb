@@ -49,6 +49,10 @@ root@debian 0+ ~/sdb master
 63) SIGRTMAX-1  64) SIGRTMAX
 ```
 
+## Usage of Pipes and Procfs
+
+TODO
+
 ## Handling Multiple Threads
 
 When a **tracee** has multiple threads, each thread is represented by a unique **thread ID (TID)** in Linux. The `ptrace` system call operates at the thread level, meaning each thread can be individually traced.
