@@ -25,6 +25,49 @@ struct user_regs
 };
 ```
 
+Unfortunately, for ARMv7 `user-regs` is defined as a single array instead individual struct fields like in x86. We can get an idea of the individual registers from `/usr/include/arm-linux-gnueabihf/asm/ptrace.h`.
+
+```C
+/*
+ * This struct defines the way the registers are stored on the
+ * stack during a system call.  Note that sizeof(struct pt_regs)
+ * has to be a multiple of 8.
+ */
+struct pt_regs {
+	long uregs[18];
+};
+
+#define ARM_cpsr	uregs[16]
+#define ARM_pc		uregs[15]
+#define ARM_lr		uregs[14]
+#define ARM_sp		uregs[13]
+#define ARM_ip		uregs[12]
+#define ARM_fp		uregs[11]
+#define ARM_r10		uregs[10]
+#define ARM_r9		uregs[9]
+#define ARM_r8		uregs[8]
+#define ARM_r7		uregs[7]
+#define ARM_r6		uregs[6]
+#define ARM_r5		uregs[5]
+#define ARM_r4		uregs[4]
+#define ARM_r3		uregs[3]
+#define ARM_r2		uregs[2]
+#define ARM_r1		uregs[1]
+#define ARM_r0		uregs[0]
+#define ARM_ORIG_r0	uregs[17]
+```
+I am not sure if these definitions are meant for userspace use. There are quite a few `ptrace.h` files throughout the `/usr/include` directory. Again, I do not know why we need so many.
+
+```bash
+root@debian 0+ /usr/include  
+$ find /usr/include -name "ptrace.h"
+/usr/include/kernel-4.9.150-imx6-sr/linux/ptrace.h
+/usr/include/kernel-4.9.150-imx6-sr/asm/ptrace.h
+/usr/include/linux/ptrace.h
+/usr/include/arm-linux-gnueabihf/sys/ptrace.h
+/usr/include/arm-linux-gnueabihf/asm/ptrace.h
+```
+
 `PTRACE_GETFPREGS` and `PTRACE_SETFPREGS` use the `user_fpregs` from the same header:
 
 ```C
