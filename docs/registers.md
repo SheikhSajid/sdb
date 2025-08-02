@@ -113,3 +113,10 @@ DWARF registers refer to the register numbering and naming scheme defined by the
 ## Debug Registers
 
 TODO
+
+## Accessing Register Data
+
+Register data is stored in the `data_` field of the `sdb::registers` class.This
+field uses the `user` struct from `<sys/user.h>`. There are several `op` flags,
+such as `PTRACE_PEEKUSER` and `PTRACE_GETREGS`, that allow reading from
+registers.
