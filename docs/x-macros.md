@@ -73,3 +73,14 @@ void print_known_cats() {
   fmt::print("{} the {} cat, age {}\n", "lexa", "black", 6);
 }
 ```
+
+## Viewing Macro Expansion Without Compiling
+
+If you want to see how the preprocessor expands your macros (including X-macros) without compiling the whole program, you can invoke your compiler with the "preprocess only" option. This will output the code to a file called `expanded.cpp`:
+
+
+```sh
+g++ -E main.cpp > expanded.cpp
+```
+
+This is useful for debugging macro expansions and understanding how X-macros are transformed by the preprocessor.
