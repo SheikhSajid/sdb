@@ -54,6 +54,7 @@
     "chrono": "cpp",
     "optional": "cpp",
     "variant": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "*.inc": "cpp"
   }
 }
