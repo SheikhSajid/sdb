@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <string_view>
 #include <sys/user.h>
+#include <asm/ptrace.h> // added for ARM ptrace definitions
 
 namespace sdb {
    enum class register_id {

@@ -1,7 +1,7 @@
 #ifdef DEFINE_REGISTER
-#define GPR_SIZE (sizeof(((struct user_regs *)0)->uregs[0]))
+#define GPR_SIZE (sizeof(((struct pt_regs *)0)->uregs[0]))
 
-#define GPR_OFFSET(reg) (offsetof(user, regs) + offsetof(user_regs, uregs) + (ARM_##reg) * GPR_SIZE))
+#define GPR_OFFSET(reg) (offsetof(user, regs) + offsetof(struct pt_regs, uregs) + (ARM_##reg) * GPR_SIZE)
 
 #define DEFINE_GPR_32(name, dwarf_id) \
   DEFINE_REGISTER(name, dwarf_id, GPR_SIZE, GPR_OFFSET(name), \
