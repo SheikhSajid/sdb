@@ -14,8 +14,8 @@ namespace sdb {
     registers(const registers&) = delete;
     registers& operator=(const registers&) = delete;
 
-    // using value = std::variant<std::uint32_t, std::int32_t, float, double, byte32>;
-    void read(const register_info& info) const;
+    using value = std::variant<std::uint32_t, std::int32_t, float, double, byte32>;
+    value read(const register_info& info) const;
     // void write(const register_info& info, value val);
 
     // template <class T>

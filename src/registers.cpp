@@ -24,5 +24,6 @@ sdb::registers::value sdb::registers::read(const register_info& info) const {
 
 
   // print "hello registers"
-  std::cout << "hello registers" << std::endl;
+  std::cout << "hello registers" << std::endl; 
+  return 0.0f;
 }

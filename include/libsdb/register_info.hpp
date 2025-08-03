@@ -1,9 +1,12 @@
 #ifndef SDB_REGISTER_INFO_HPP
 #define SDB_REGISTER_INFO_HPP
 
+#include <algorithm>
 #include <cstdint>
 #include <cstddef>
 #include <string_view>
+
+#include <libsdb/error.hpp> // ? why is this needed in multiple files?
 
 namespace sdb {
    enum class register_id {
@@ -13,7 +16,7 @@ namespace sdb {
     };
 
   enum class register_type {
-    gpr, fpr, dr // i think this is x86 specific
+    gpr, fpr, dr
   };
 
   enum class register_format {
